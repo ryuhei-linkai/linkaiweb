@@ -84,11 +84,11 @@ function NewsPage() {
               <img src="/images/file.png" alt="会社ロゴ" className="h-8 cursor-pointer" />
             </Link>
           </div>
-          <ul className="hidden md:flex space-x-8 text-black">
+          <ul className="hidden md:flex space-x-8 text-black mr-20">
             <li><Link href="/company">会社情報</Link></li>
             <li><Link href="/business">事業内容</Link></li>
             <li><Link href="/news">ニュース</Link></li>
-            <li><Link href="/contact">お問い合わせ</Link></li>
+            <li className="mr-10"><Link href="/contact">お問い合わせ</Link></li>
           </ul>
           <button 
             className="md:hidden text-black z-50 relative"
