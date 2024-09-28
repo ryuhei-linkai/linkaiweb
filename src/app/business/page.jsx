@@ -114,7 +114,10 @@ function MainComponent() {
             <div className="relative mb-10 w-full md:w-[85%]">
               <div className="bg-[#c81684] p-12 rounded-lg flex items-center justify-between relative overflow-hidden h-48 md:h-auto">
                 <span className="text-white text-3xl font-bold z-10 md:mr-[15%]">Sales AI Agent</span>
-                <div className="absolute bottom-0 right-0 w-1/3 md:w-1/2 h-1/2 md:h-full overflow-visible">
+                <div className="absolute inset-0 z-0">
+                  <img src="/images/fv.png" alt="背景" className="w-full h-full object-cover opacity-30" />
+                </div>
+                <div className="absolute bottom-0 right-0 w-1/3 md:w-1/2 h-1/2 md:h-full overflow-visible z-20">
                   <img src="/images/product.png" alt="Urimacho" className="h-full w-full object-cover object-left" />
                 </div>
               </div>
@@ -168,9 +171,9 @@ function MainComponent() {
             </h2>
             <div className="relative mb-10 w-full md:w-[85%]">
               <div className="bg-[#c81684] p-12 rounded-lg flex items-center justify-between relative overflow-hidden h-48 md:h-auto">
-                <span className="text-white text-3xl font-bold z-10 md:mr-[15%]">Sales AI Agent</span>
-                <div className="absolute bottom-0 right-0 w-1/3 md:w-1/2 h-1/2 md:h-full overflow-visible">
-                  <img src="/images/AIsolution.png" alt="Sales AI Agent" className="h-full w-full object-cover object-left" />
+                <span className="text-white text-3xl font-bold z-10 md:mr-[15%]">AI・DXソリューション</span>
+                <div className="absolute inset-0 z-0">
+                  <img src="/images/fv.png" alt="背景" className="w-full h-full object-cover opacity-30" />
                 </div>
               </div>
             </div>
