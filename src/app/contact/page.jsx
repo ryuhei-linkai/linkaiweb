@@ -6,6 +6,7 @@ import Image from 'next/image';
 function MainComponent() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isHeaderWhite, setIsHeaderWhite] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     inquiryType: '製品について',
     companyName: '',
@@ -111,6 +112,10 @@ function MainComponent() {
     }
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <div className="relative">
       <div 
@@ -121,18 +126,40 @@ function MainComponent() {
       ></div>
       <div className="relative z-10">
         <header className={`w-full flex justify-between items-center font-bold text-sm p-5 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isHeaderWhite ? 'bg-white' : 'bg-transparent'}`}>
-          <div className="flex items-center space-x-2 mx-20">
-            <img src="/images/file.png" alt="会社ロゴ" className="h-8" />
+          <div className="flex items-center space-x-2 mx-4 md:mx-20">
+            <Link href="/">
+              <img src="/images/file.png" alt="会社ロゴ" className="h-8 cursor-pointer" />
+            </Link>
           </div>
-          <ul className="hidden sm:flex space-x-8 text-black">
+          <ul className="hidden md:flex space-x-8 text-black">
             <li><Link href="/company">会社情報</Link></li>
             <li><Link href="/business">事業内容</Link></li>
             <li><Link href="/news">ニュース</Link></li>
             <li><Link href="/contact">お問い合わせ</Link></li>
           </ul>
-          <div className="flex space-x-4 mx-4">
-          </div>
+          <button 
+            className="md:hidden text-black z-50 relative"
+            onClick={toggleMobileMenu}
+          >
+            {isMobileMenuOpen ? '✕' : '☰'}
+          </button>
         </header>
+        <div 
+          className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
+            isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
+          style={{
+            clipPath: isMobileMenuOpen ? 'circle(150% at 100% 0)' : 'circle(0% at 100% 0)',
+            transition: 'clip-path 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out'
+          }}
+        >
+          <ul className="text-black text-xl space-y-6">
+            <li><Link href="/company" onClick={toggleMobileMenu}>会社情報</Link></li>
+            <li><Link href="/business" onClick={toggleMobileMenu}>事業内容</Link></li>
+            <li><Link href="/news" onClick={toggleMobileMenu}>ニュース</Link></li>
+            <li><Link href="/contact" onClick={toggleMobileMenu}>お問い合わせ</Link></li>
+          </ul>
+        </div>
         <div className="min-h-screen flex flex-col justify-center items-center text-center p-5 relative">
           <div className="absolute inset-0 bg-white opacity-80"></div>
           <main className="text-black mt-32 relative z-10">
@@ -256,27 +283,26 @@ function MainComponent() {
             <div className="w-full md:w-3/4 flex flex-wrap justify-around">
               <div className="mb-5">
                 <ul>
-                  <li>Purpose & Mission</li>
-                  <li>会社概要</li>
+                  <li><a href="/company" target="_blank" rel="noopener noreferrer">会社概要</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <ul>
-                  <li>事業内容</li>
-                  <li>ニュース</li>
-                  <li>お問い合わせ</li>
+                  <li><a href="/business" target="_blank" rel="noopener noreferrer">事業内容</a></li>
+                  <li><a href="/news" target="_blank" rel="noopener noreferrer">ニュース</a></li>
+                  <li><a href="/contact" target="_blank" rel="noopener noreferrer">お問い合わせ</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <ul>
-                  <li>採用情報</li>
+                  <li><a href="/recruit" target="_blank" rel="noopener noreferrer">採用情報</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <p>メディア・ブログ</p>
                 <ul>
-                  <li>X</li>
-                  <li>ブログ</li>
+                  <li><a href="https://x.com/airunner_linkai" target="_blank" rel="noopener noreferrer">X</a></li>
+                  <li><a href="https://note.com/gabc/" target="_blank" rel="noopener noreferrer">ブログ</a></li>
                 </ul>
               </div>
             </div>

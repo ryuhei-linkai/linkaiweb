@@ -7,14 +7,14 @@ function MainComponent() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [newsItems, setNewsItems] = useState([]);
   const [isHeaderWhite, setIsHeaderWhite] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const position = window.pageYOffset;
       setScrollPosition(position);
       
-      // FVの高さを超えたらヘッダーを白色に
-      const fvHeight = window.innerHeight; // FVの高さを取得（適宜調整してください）
+      const fvHeight = window.innerHeight;
       setIsHeaderWhite(position > fvHeight);
     };
 
@@ -50,7 +50,6 @@ function MainComponent() {
       });
     }, 300);
 
-    // ニュースアイテムを設定
     setNewsItems([
       { id: '1', title: '株式会社Link AIを設立', date: '2024.02.08', category: 'プレスリリース', image: '/images/LinkAI.png' },
       { id: '2', title: 'WEBマーケティング自動化ツール リリース', date: '2024.05.15', category: 'プレスリリース', image: '/images/tool.png' },
@@ -59,9 +58,13 @@ function MainComponent() {
   }, []);
 
   const getGrayscaleValue = () => {
-    const maxScroll = 1000; // FVセクションの高さに応じて調整してください
+    const maxScroll = 1000;
     const grayscale = Math.min(scrollPosition / maxScroll * 100, 100);
     return grayscale;
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -74,23 +77,45 @@ function MainComponent() {
       ></div>
       <div className="relative z-10">
         <header className={`w-full flex justify-between items-center font-bold text-sm p-5 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isHeaderWhite ? 'bg-white' : 'bg-transparent'}`}>
-          <div className="flex items-center space-x-2 mx-20">
-            <img src="/images/file.png" alt="会社ロゴ" className="h-8" />
+          <div className="flex items-center space-x-2 mx-4 md:mx-20">
+            <Link href="/">
+              <img src="/images/file.png" alt="会社ロゴ" className="h-8 cursor-pointer" />
+            </Link>
           </div>
-          <ul className="hidden sm:flex space-x-8 text-black">
+          <ul className="hidden md:flex space-x-8 text-black">
             <li><Link href="/company">会社情報</Link></li>
             <li><Link href="/business">事業内容</Link></li>
             <li><Link href="/news">ニュース</Link></li>
             <li><Link href="/contact">お問い合わせ</Link></li>
           </ul>
-          <div className="flex space-x-4 mx-4">
-          </div>
+          <button 
+            className="md:hidden text-black z-50 relative"
+            onClick={toggleMobileMenu}
+          >
+            {isMobileMenuOpen ? '✕' : '☰'}
+          </button>
         </header>
+        <div 
+          className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
+            isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
+          style={{
+            clipPath: isMobileMenuOpen ? 'circle(150% at 100% 0)' : 'circle(0% at 100% 0)',
+            transition: 'clip-path 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out'
+          }}
+        >
+          <ul className="text-black text-xl space-y-6">
+            <li><Link href="/company" onClick={toggleMobileMenu}>会社情報</Link></li>
+            <li><Link href="/business" onClick={toggleMobileMenu}>事業内容</Link></li>
+            <li><Link href="/news" onClick={toggleMobileMenu}>ニュース</Link></li>
+            <li><Link href="/contact" onClick={toggleMobileMenu}>お問い合わせ</Link></li>
+          </ul>
+        </div>
         <div className="min-h-screen flex flex-col justify-center items-center text-center p-5 relative">
           <div className="absolute inset-0 bg-white opacity-80"></div>
           <main className="text-black mt-32 relative z-10">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-text">
-事業内容
+              事業内容
             </h1>
             <button 
               className="px-6 py-3 text-black transition-all animate-text group"
@@ -237,9 +262,6 @@ function MainComponent() {
           <div className="relative z-10">
             <h2 className="text-4xl font-bold mb-5">AI FOR HAPPINESS</h2>
             <p className="mb-10">AIを活用して、人々の幸福を向上させる</p>
-            <button className="border border-white px-5 py-3 hover:bg-white hover:text-gray-800 transition-all">
-              VIEW MORE
-            </button>
           </div>
         </section>
 
@@ -252,27 +274,26 @@ function MainComponent() {
             <div className="w-full md:w-3/4 flex flex-wrap justify-around">
               <div className="mb-5">
                 <ul>
-                  <li>Purpose & Mission</li>
-                  <li>会社概要</li>
+                  <li><a href="/company" target="_blank" rel="noopener noreferrer">会社概要</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <ul>
-                  <li>事業内容</li>
-                  <li>ニュース</li>
-                  <li>お問い合わせ</li>
+                  <li><a href="/business" target="_blank" rel="noopener noreferrer">事業内容</a></li>
+                  <li><a href="/news" target="_blank" rel="noopener noreferrer">ニュース</a></li>
+                  <li><a href="/contact" target="_blank" rel="noopener noreferrer">お問い合わせ</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <ul>
-                  <li>採用情報</li>
+                  <li><a href="/recruit" target="_blank" rel="noopener noreferrer">採用情報</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <p>メディア・ブログ</p>
                 <ul>
-                  <li>X</li>
-                  <li>ブログ</li>
+                  <li><a href="https://x.com/airunner_linkai" target="_blank" rel="noopener noreferrer">X</a></li>
+                  <li><a href="https://note.com/gabc/" target="_blank" rel="noopener noreferrer">ブログ</a></li>
                 </ul>
               </div>
             </div>

@@ -7,14 +7,14 @@ function MainComponent() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [newsItems, setNewsItems] = useState([]);
   const [isHeaderWhite, setIsHeaderWhite] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const position = window.pageYOffset;
       setScrollPosition(position);
       
-      // FVの高さを超えたらヘッダーを白色に
-      const fvHeight = window.innerHeight; // FVの高さを取得（適宜調整してください）
+      const fvHeight = window.innerHeight;
       setIsHeaderWhite(position > fvHeight);
     };
 
@@ -50,7 +50,6 @@ function MainComponent() {
       });
     }, 300);
 
-    // ニュースアイテムを設定
     setNewsItems([
       { id: '1', title: '株式会社Link AIを設立', date: '2024.02.08', category: 'プレスリリース', image: '/images/LinkAI.png' },
       { id: '2', title: 'WEBマーケティング自動化ツール リリース', date: '2024.05.15', category: 'プレスリリース', image: '/images/tool.png' },
@@ -59,9 +58,13 @@ function MainComponent() {
   }, []);
 
   const getGrayscaleValue = () => {
-    const maxScroll = 1000; // FVセクションの高さに応じて調整してください
+    const maxScroll = 1000;
     const grayscale = Math.min(scrollPosition / maxScroll * 100, 100);
     return grayscale;
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -74,56 +77,85 @@ function MainComponent() {
       ></div>
       <div className="relative z-10">
         <header className={`w-full flex justify-between items-center font-bold text-sm p-5 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isHeaderWhite ? 'bg-white' : 'bg-transparent'}`}>
-          <div className="flex items-center space-x-2 mx-20">
-            <img src="/images/file.png" alt="会社ロゴ" className="h-10" />
+          <div className="flex items-center space-x-2 mx-4 md:mx-20">
+            <Link href="/">
+              <img src="/images/file.png" alt="会社ロゴ" className="h-8 cursor-pointer" />
+            </Link>
           </div>
-          <ul className="hidden sm:flex space-x-8 text-black">
+          <ul className="hidden md:flex space-x-8 text-black">
             <li><Link href="/company">会社情報</Link></li>
             <li><Link href="/business">事業内容</Link></li>
             <li><Link href="/news">ニュース</Link></li>
             <li><Link href="/contact">お問い合わせ</Link></li>
           </ul>
-          <div className="flex space-x-4 mx-4">
-          </div>
+          <button 
+            className="md:hidden text-black z-50 relative"
+            onClick={toggleMobileMenu}
+          >
+            {isMobileMenuOpen ? '✕' : '☰'}
+          </button>
         </header>
+        <div 
+          className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
+            isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
+          style={{
+            clipPath: isMobileMenuOpen ? 'circle(150% at 100% 0)' : 'circle(0% at 100% 0)',
+            transition: 'clip-path 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out'
+          }}
+        >
+          <ul className="text-black text-xl space-y-6">
+            <li><Link href="/company" onClick={toggleMobileMenu}>会社情報</Link></li>
+            <li><Link href="/business" onClick={toggleMobileMenu}>事業内容</Link></li>
+            <li><Link href="/news" onClick={toggleMobileMenu}>ニュース</Link></li>
+            <li><Link href="/contact" onClick={toggleMobileMenu}>お問い合わせ</Link></li>
+          </ul>
+        </div>
         <div className="min-h-screen flex flex-col justify-center items-center text-center p-5 relative">
           <div className="absolute inset-0 bg-white opacity-80"></div>
           <main className="text-black mt-32 relative z-10">
-            <h1 className="text-4xl md:text-7xl font-bold mb-4 animate-text">
+            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 animate-text leading-relaxed">
               興味の赴くままに生きられる
-              <br />
+              <br className="mb-4" />
               世の中を創る
             </h1>
             <p className="text-sm md:text-lg mb-8 animate-text">生成AIを社会に実装し、より人間が人間らしい暮らしができる世の中を創造する</p>
-            <button className="px-6 py-3 border border-black text-black hover:border-red-500 hover:text-red-500 transition-all animate-text">
-              VIEW MORE →
+            <button 
+              className="px-6 py-3 text-black transition-all animate-text group"
+              onClick={() => {
+                const newsSection = document.getElementById('business-section');
+                newsSection.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span className="block transition-transform duration-300 group-hover:translate-y-1">VIEW MORE</span>
+              <span className="block mt-1 transform transition-all duration-300 group-hover:translate-y-1 group-hover:opacity-70">↓</span>
             </button>
           </main>
         </div>
 
-        <section className="py-20 px-5 text-gray-800 relative">
+        <section id="business-section" className="py-20 px-5 text-gray-800 relative">
           <div className="absolute inset-0 bg-white opacity-80"></div>
           <div className="relative z-10">
-            <h2 className="text-left text-9xl font-bold mb-10 ml-20">
+            <h2 className="text-left text-5xl md:text-7xl lg:text-9xl font-bold mb-10 ml-4 md:ml-20">
               <span className="bg-gradient-to-r from-purple-300 to-pink-300 text-transparent bg-clip-text">Business</span>
             </h2>
-            <div className="flex flex-col space-y-32 ml-20 mr-20">
+            <div className="flex flex-col space-y-16 md:space-y-32 mx-4 md:mx-20">
               <div className="relative group">
                 <img
                   src="/images/営業AIエージェント.jpg"
                   alt="Sales AI Agent"
-                  className="w-full md:w-4/5 h-[550px] object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full md:w-4/5 h-[300px] md:h-[550px] object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="bg-white p-8 shadow-md rounded-none md:w-3/4 absolute bottom-0 left-1/4 transform -translate-x-1/3 translate-y-1/4 z-10 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105">
-                  <h3 className="text-2xl mb-3 tracking-wide font-bold">
+                <div className="bg-white p-4 md:p-8 shadow-md rounded-none md:w-3/4 absolute bottom-0 left-0 md:left-1/4 transform md:-translate-x-1/3 translate-y-1/4 z-10 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105">
+                  <h3 className="text-xl md:text-2xl mb-3 tracking-wide font-bold">
                     Sales AI Agent
                   </h3>
-                  <p className="mb-4 text-sm leading-relaxed">リード獲得～受注までの商談プロセスのあらゆる活動をAIで業務効率化する。営業マン本来の仕事である顧客との対話に集中できる環境を整える。</p>
+                  <p className="mb-4 text-xs md:text-sm leading-relaxed">リード獲得～受注までの商談プロセスのあらゆる活動をAIで業務効率化する。営業マン本来の仕事である顧客との対話に集中できる環境を整える。</p>
                   <div className="text-right">
-                    <button className="text-purple-600 text-xs uppercase tracking-widest hover:text-purple-800 transition-colors duration-300 relative group">
+                    <Link href="/business" className="text-purple-600 text-xs uppercase tracking-widest hover:text-purple-800 transition-colors duration-300 relative group">
                       <span className="relative z-10">View more →</span>
                       <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-600 group-hover:w-full transition-all duration-300"></span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -131,18 +163,18 @@ function MainComponent() {
                 <img
                   src="/images/AIシステム開発.jpg"
                   alt="AI/DXシステム開発"
-                  className="w-full md:w-4/5 h-[550px] object-cover ml-auto transition-transform duration-300 group-hover:scale-105"
+                  className="w-full md:w-4/5 h-[300px] md:h-[550px] object-cover ml-auto transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="bg-white p-8 shadow-md rounded-none md:w-3/4 absolute bottom-0 right-1/4 transform translate-x-1/3 translate-y-1/4 z-10 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105">
-                  <h3 className="text-2xl mb-3 tracking-wide font-bold">
+                <div className="bg-white p-4 md:p-8 shadow-md rounded-none md:w-3/4 absolute bottom-0 right-0 md:right-1/4 transform md:translate-x-1/3 translate-y-1/4 z-10 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105">
+                  <h3 className="text-xl md:text-2xl mb-3 tracking-wide font-bold">
                     AI/DXシステム開発
                   </h3>
-                  <p className="mb-4 text-sm leading-relaxed">1人月単位でのAI人材のアサインから、予算に適した費用感でのPoC推進、AIシステムやアプリケーションの受託開発まで、お客様にあった支援スキームを柔軟に設計。プロジェクトの成功を実現します。</p>
+                  <p className="mb-4 text-xs md:text-sm leading-relaxed">1人月単位でのAI人材のアサインから、予算に適した費用感でのPoC推進、AIシステムやアプリケーションの受託開発まで、お客様にあった支援スキームを柔軟に設計。プロジェクトの成功を実現します。</p>
                   <div className="text-right">
-                    <button className="text-purple-600 text-xs uppercase tracking-widest hover:text-purple-800 transition-colors duration-300 relative group">
+                    <Link href="/business" className="text-purple-600 text-xs uppercase tracking-widest hover:text-purple-800 transition-colors duration-300 relative group">
                       <span className="relative z-10">View more →</span>
                       <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-600 group-hover:w-full transition-all duration-300"></span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -150,18 +182,18 @@ function MainComponent() {
                 <img
                   src="/images/DXコンサル.png"
                   alt="AI/DXコンサルティング"
-                  className="w-full md:w-4/5 h-[550px] object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full md:w-4/5 h-[300px] md:h-[550px] object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="bg-white p-8 shadow-md rounded-none md:w-3/4 absolute bottom-0 left-1/4 transform -translate-x-1/3 translate-y-1/4 z-10 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105">
-                  <h3 className="text-2xl mb-3 tracking-wide font-bold">
+                <div className="bg-white p-4 md:p-8 shadow-md rounded-none md:w-3/4 absolute bottom-0 left-0 md:left-1/4 transform md:-translate-x-1/3 translate-y-1/4 z-10 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105">
+                  <h3 className="text-xl md:text-2xl mb-3 tracking-wide font-bold">
                     AI/DXコンサルティング
                   </h3>
-                  <p className="mb-4 text-sm leading-relaxed">多数のプロジェクトを成功させてきたコンサルタントをアサインし、AI・DX戦略の策定から実行推進まで泥臭く伴走します。</p>
+                  <p className="mb-4 text-xs md:text-sm leading-relaxed">多数のプロジェクトを成功させてきたコンサルタントをアサインし、AI・DX戦略の策定から実行推進まで泥臭く伴走します。</p>
                   <div className="text-right">
-                    <button className="text-purple-600 text-xs uppercase tracking-widest hover:text-purple-800 transition-colors duration-300 relative group">
+                    <Link href="/business" className="text-purple-600 text-xs uppercase tracking-widest hover:text-purple-800 transition-colors duration-300 relative group">
                       <span className="relative z-10">View more →</span>
                       <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-600 group-hover:w-full transition-all duration-300"></span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -172,25 +204,25 @@ function MainComponent() {
         <section className="py-20 px-5 text-gray-800 relative">
           <div className="absolute inset-0 bg-white opacity-80"></div>
           <div className="relative z-10 mx-auto max-w-6xl">
-            <div className="bg-white bg-opacity-80 p-10 rounded-lg mx-4 md:mx-8">
-              <h2 className="text-center text-4xl font-bold mb-10">News</h2>
+            <div className="bg-white bg-opacity-80 p-4 md:p-10 rounded-lg mx-2 md:mx-8">
+              <h2 className="text-center text-3xl md:text-4xl font-bold mb-10">News</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {newsItems.map((item) => (
                   <Link href={`/news/${item.id}`} key={item.id} className="block">
-                    <div className="p-5 border rounded shadow-sm bg-white">
+                    <div className="p-4 md:p-5 bg-white">
                       <Image src={item.image} alt={item.title} width={200} height={150} className="h-[150px] w-full object-cover mb-2" />
-                      <div className="flex items-center space-x-4 mb-2">
-                        <span className="text-sm text-gray-500">{item.date}</span>
+                      <div className="flex flex-wrap items-center space-x-2 md:space-x-4 mb-2">
+                        <span className="text-xs md:text-sm text-gray-500">{item.date}</span>
                         <span className="px-2 py-1 bg-gray-200 text-xs text-gray-700 rounded-full">{item.category}</span>
                       </div>
-                      <h3 className="font-semibold">{item.title}</h3>
+                      <h3 className="text-sm md:text-base font-semibold">{item.title}</h3>
                     </div>
                   </Link>
                 ))}
               </div>
               <div className="mt-10 text-center">
                 <Link href="/news" className="inline-block relative group">
-                  <span className="text-purple-600 text-lg font-semibold">VIEW ALL →</span>
+                  <span className="text-purple-600 text-base md:text-lg font-semibold">VIEW ALL →</span>
                   <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-600 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </div>
@@ -198,7 +230,7 @@ function MainComponent() {
           </div>
         </section>
 
-        <section className="bg-gray-800 bg-opacity-80 text-white py-32 text-center relative">
+        <section className="bg-gray-800 bg-opacity-80 text-white py-20 md:py-32 text-center relative">
           <div className="absolute inset-0 z-0">
             <Image src="/images/東京タワー.png" alt="東京タワー" layout="fill" objectFit="cover" />
             <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -206,9 +238,6 @@ function MainComponent() {
           <div className="relative z-10">
             <h2 className="text-5xl font-bold mb-5">AI FOR HAPPINESS</h2>
             <p className="mb-10">AIを活用して、人々の幸福を向上させる</p>
-            <button className="border border-white px-5 py-3 hover:bg-white hover:text-gray-800 transition-all">
-              VIEW MORE
-            </button>
           </div>
         </section>
 
@@ -221,7 +250,6 @@ function MainComponent() {
             <div className="w-full md:w-3/4 flex flex-wrap justify-around">
               <div className="mb-5">
                 <ul>
-                  <li>Purpose & Mission</li>
                   <li>会社概要</li>
                 </ul>
               </div>
