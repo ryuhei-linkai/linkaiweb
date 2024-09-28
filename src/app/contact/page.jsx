@@ -182,83 +182,83 @@ function MainComponent() {
         <section id="company-section" className="py-20 px-5 text-gray-800 relative">
           <div className="absolute inset-0 bg-white opacity-80"></div>
           <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-center text-7xl font-bold mb-24">
+            <h2 className="text-center text-5xl md:text-7xl font-bold mb-12 md:mb-24">
               <span className="bg-gradient-to-r from-purple-300 to-pink-300 text-transparent bg-clip-text">Contact</span>
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="flex border-b border-gray-300 pb-4">
-                <h3 className="text-xl font-bold w-1/4">お問い合わせ内容</h3>
+              <div className="flex flex-col md:flex-row border-b border-gray-300 pb-4">
+                <h3 className="text-xl font-bold w-full md:w-1/4 mb-2 md:mb-0">お問い合わせ内容</h3>
                 <select
                   id="inquiryType"
                   name="inquiryType"
                   value={formData.inquiryType}
                   onChange={handleInputChange}
-                  className="w-3/4 border-gray-300 p-2"
+                  className="w-full md:w-3/4 border-gray-300 p-2 rounded-md"
                 >
                   <option>製品について</option>
                   <option>サポートについて</option>
                   <option>その他</option>
                 </select>
               </div>
-              <div className="flex border-b border-gray-300 pb-4">
-                <h3 className="text-xl font-bold w-1/4">会社名</h3>
+              <div className="flex flex-col md:flex-row border-b border-gray-300 pb-4">
+                <h3 className="text-xl font-bold w-full md:w-1/4 mb-2 md:mb-0">会社名</h3>
                 <input
                   type="text"
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleInputChange}
                   placeholder="会社名"
-                  className="w-3/4 border-gray-300 p-2"
+                  className="w-full md:w-3/4 border-gray-300 p-2 rounded-md"
                 />
               </div>
-              <div className="flex border-b border-gray-300 pb-4">
-                <h3 className="text-xl font-bold w-1/4">部署名</h3>
+              <div className="flex flex-col md:flex-row border-b border-gray-300 pb-4">
+                <h3 className="text-xl font-bold w-full md:w-1/4 mb-2 md:mb-0">部署名</h3>
                 <input
                   type="text"
                   name="departmentName"
                   value={formData.departmentName}
                   onChange={handleInputChange}
                   placeholder="御社内の部署名"
-                  className="w-3/4 border-gray-300 p-2"
+                  className="w-full md:w-3/4 border-gray-300 p-2 rounded-md"
                 />
               </div>
-              <div className="flex border-b border-gray-300 pb-4">
-                <h3 className="text-xl font-bold w-1/4">お名前</h3>
+              <div className="flex flex-col md:flex-row border-b border-gray-300 pb-4">
+                <h3 className="text-xl font-bold w-full md:w-1/4 mb-2 md:mb-0">お名前</h3>
                 <input
                   type="text"
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleInputChange}
                   placeholder="お名前"
-                  className="w-3/4 border-gray-300 p-2"
+                  className="w-full md:w-3/4 border-gray-300 p-2 rounded-md"
                 />
               </div>
-              <div className="flex border-b border-gray-300 pb-4">
-                <h3 className="text-xl font-bold w-1/4">メールアドレス</h3>
+              <div className="flex flex-col md:flex-row border-b border-gray-300 pb-4">
+                <h3 className="text-xl font-bold w-full md:w-1/4 mb-2 md:mb-0">メールアドレス</h3>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="メールアドレス"
-                  className="w-3/4 border-gray-300 p-2"
+                  className="w-full md:w-3/4 border-gray-300 p-2 rounded-md"
                 />
               </div>
-              <div className="flex border-b border-gray-300 pb-4">
-                <h3 className="text-xl font-bold w-1/4">お問い合わせ内容</h3>
+              <div className="flex flex-col md:flex-row border-b border-gray-300 pb-4">
+                <h3 className="text-xl font-bold w-full md:w-1/4 mb-2 md:mb-0">お問い合わせ内容</h3>
                 <textarea
                   name="inquiryContent"
                   value={formData.inquiryContent}
                   onChange={handleInputChange}
                   placeholder="お問い合わせ内容をご記入ください"
-                  className="w-3/4 border-gray-300 p-2"
+                  className="w-full md:w-3/4 border-gray-300 p-2 rounded-md"
                   rows="5"
                 ></textarea>
               </div>
-              <button type="submit" className="w-full bg-black text-white py-2" disabled={isSubmitting}>
+              <button type="submit" className="w-full bg-black text-white py-3 rounded-md transition-colors duration-300 hover:bg-gray-800" disabled={isSubmitting}>
                 {isSubmitting ? '送信中...' : '確認する'}
               </button>
-              {submitMessage && <p className="text-center text-green-600">{submitMessage}</p>}
+              {submitMessage && <p className="text-center text-green-600 mt-4">{submitMessage}</p>}
             </form>
           </div>
         </section>
