@@ -250,26 +250,26 @@ function MainComponent() {
             <div className="w-full md:w-3/4 flex flex-wrap justify-around">
               <div className="mb-5">
                 <ul>
-                  <li>会社概要</li>
+                  <li><a href="/company" target="_blank" rel="noopener noreferrer">会社概要</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <ul>
-                  <li>事業内容</li>
-                  <li>ニュース</li>
-                  <li>お問い合わせ</li>
+                  <li><a href="/business" target="_blank" rel="noopener noreferrer">事業内容</a></li>
+                  <li><a href="/news" target="_blank" rel="noopener noreferrer">ニュース</a></li>
+                  <li><a href="/contact" target="_blank" rel="noopener noreferrer">お問い合わせ</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <ul>
-                  <li>採用情報</li>
+                  <li><a href="/recruit" target="_blank" rel="noopener noreferrer">採用情報</a></li>
                 </ul>
               </div>
               <div className="mb-5">
                 <p>メディア・ブログ</p>
                 <ul>
-                  <li>X</li>
-                  <li>ブログ</li>
+                  <li><a href="https://x.com/airunner_linkai" target="_blank" rel="noopener noreferrer">X</a></li>
+                  <li><a href="https://note.com/gabc/" target="_blank" rel="noopener noreferrer">ブログ</a></li>
                 </ul>
               </div>
             </div>
