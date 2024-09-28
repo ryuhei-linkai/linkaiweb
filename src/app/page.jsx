@@ -70,13 +70,10 @@ function MainComponent() {
   return (
     <div className="relative">
       <div 
-        className="w-full h-full bg-[url('/images/background.png')] bg-cover bg-center bg-fixed absolute top-0 left-0"
+        className="w-full h-full bg-[url('/images/background.png')] bg-cover bg-center bg-fixed absolute top-0 left-0 md:bg-fixed"
         style={{
           filter: `grayscale(${getGrayscaleValue()}%)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          transform: 'scale(1.1)',
-          transformOrigin: 'center center'
+          backgroundAttachment: 'scroll'
         }}
       ></div>
       <div className="relative z-10">
