@@ -7,3 +7,36 @@
 body {
   font-family: 'Noto Sans JP', sans-serif;
 }
+
+@layer utilities {
+  .landing-page-title-span {
+    margin-bottom: 2rem !important;
+  }
+  
+  @screen md {
+    .landing-page-title-span {
+      margin-bottom: 3rem !important;
+    }
+  }
+  
+  @screen lg {
+    .landing-page-title-span {
+      margin-bottom: 4rem !important;
+    }
+  }
+}
+
+@keyframes text-focus-in {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+.animate-text {
+  animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}

@@ -112,26 +112,26 @@ function MainComponent() {
           </ul>
         </div>
         <div className="min-h-screen flex flex-col justify-center items-center text-center p-5 relative">
-          <div className="absolute inset-0 bg-white opacity-80"></div>
-          <main className="text-black mt-32 relative z-10">
-            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 animate-text leading-tight">
-              <span className="mb-30 block">AIによって</span>
-              <span className="mb-30 block">　仕事を変え、</span>
-              <span className="mb-30 block">　世の中を変えていく。</span>
-            </h1>
-            <p className="text-sm md:text-lg mb-8 animate-text">生成AIを社会に実装し、より人間が人間らしい暮らしができる世の中を創造する</p>
-            <button 
-              className="px-6 py-3 text-black transition-all animate-text group"
-              onClick={() => {
-                const newsSection = document.getElementById('business-section');
-                newsSection.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              <span className="block transition-transform duration-300 group-hover:translate-y-1">VIEW MORE</span>
-              <span className="block mt-1 transform transition-all duration-300 group-hover:translate-y-1 group-hover:opacity-70">↓</span>
-            </button>
-          </main>
-        </div>
+      <div className="absolute inset-0 bg-white opacity-80"></div>
+      <main className="text-black mt-32 relative z-10">
+        <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 leading-tight animate-text">
+          <span className="landing-page-title-span block">AIによって</span>
+          <span className="landing-page-title-span block">　仕事を変え、</span>
+          <span className="landing-page-title-span block">　世の中を変えていく。</span>
+        </h1>
+        <p className="text-sm md:text-lg mb-8 animate-text">生成AIを社会に実装し、より人間が人間らしい暮らしができる世の中を創造する</p>
+        <button 
+          className="px-6 py-3 text-black transition-all animate-text group"
+          onClick={() => {
+            const newsSection = document.getElementById('business-section');
+            newsSection.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          <span className="block transition-transform duration-300 group-hover:translate-y-1">VIEW MORE</span>
+          <span className="block mt-1 transform transition-all duration-300 group-hover:translate-y-1 group-hover:opacity-70">↓</span>
+        </button>
+      </main>
+    </div>
 
         <section id="business-section" className="py-20 px-5 text-gray-800 relative">
           <div className="absolute inset-0 bg-white opacity-80"></div>
@@ -208,7 +208,7 @@ function MainComponent() {
               <h2 className="text-center text-3xl md:text-4xl font-bold mb-10">News</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {newsItems.map((item) => (
-                  <Link href={`/news/${item.id}`} key={item.id} className="block">
+                  <div key={item.id} className="block">
                     <div className="p-4 md:p-5 bg-white">
                       <Image src={item.image} alt={item.title} width={200} height={150} className="h-[150px] w-full object-cover mb-2" />
                       <div className="flex flex-wrap items-center space-x-2 md:space-x-4 mb-2">
@@ -217,14 +217,14 @@ function MainComponent() {
                       </div>
                       <h3 className="text-sm md:text-base font-semibold">{item.title}</h3>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
               <div className="mt-10 text-center">
-                <Link href="/news" className="inline-block relative group">
+                <span className="inline-block relative group">
                   <span className="text-purple-600 text-base md:text-lg font-semibold">VIEW ALL →</span>
                   <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-600 group-hover:w-full transition-all duration-300"></span>
-                </Link>
+                </span>
               </div>
             </div>
           </div>
