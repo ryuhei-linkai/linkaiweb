@@ -188,6 +188,45 @@ function CompanyPage() {
           </div>
         </section>
 
+        <section id="member-section" className="py-20 px-5 text-gray-800 relative">
+          <div className="absolute inset-0 bg-white opacity-80"></div>
+          <div className="relative z-10 max-w-4xl mx-auto">
+            <h2 className="text-center text-7xl font-bold mb-24">
+              <span className="bg-gradient-to-r from-purple-300 to-pink-300 text-transparent bg-clip-text">Member</span>
+            </h2>
+            <div className="space-y-24">
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="w-full md:w-1/3 mb-12 md:mb-0">
+                  <div className="w-64 h-64 mx-auto">
+                    <Image src="/images/ando.jpg" alt="CEO" width={256} height={256} className="object-cover" />
+                  </div>
+                </div>
+                <div className="w-full md:w-2/3 md:pl-16">
+                  <h3 className="text-2xl font-bold mb-6">CEO 安東竜平</h3>
+                  <p className="text-lg mb-4">
+                  中学から大学まで、駅伝強豪校で全国優勝を目指し競技に打ち込んでいた。そこで「1番になる」という強い想いを培い、大学時代から、「起業して大企業を創る」ことに憧れを持つ。
+そのために、ビジネスの基礎を固める目的で卒業後はデジタルマーケティング企業で営業職として経験を積む。
+その後、ChatGPTの台頭により「世の中が変わる」という予感と、大きなチャンスを同時に感じ、この革新的な技術を社会に役立てる事業を起こしたいと思い起業を決意。AIの進化の速さと、人々の課題を解決する可能性の大きさに感銘を受け、「AIの社会実装」こそが今後の社会に必要なことだと確信し、現在はその信念のもと、AIで社会をより良くするための事業に挑戦している。
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="w-full md:w-1/3 mb-12 md:mb-0">
+                  <div className="w-64 h-64 mx-auto">
+                    <Image src="/images/kohata.jpg" alt="COO" width={256} height={256} className="object-cover" />
+                  </div>
+                </div>
+                <div className="w-full md:w-2/3 md:pl-16">
+                  <h3 className="text-2xl font-bold mb-6">COO 木幡靖彦</h3>
+                  <p className="text-lg mb-4">
+                    データ分析・デジタルマーケティング支援企業で10年の経験を経て、Link AIを創業。生成AIを活用した"圧倒的"な業務自動化を自社で実現し、それらをサービスとして提供。営業、データ活用コンサルティング、プロダクトマネジメントの経験を活かし、AIとビジネスの実践的融合に取り組む。自社での成功事例を基に、企業のAI導入と活用を支援。複雑なAI技術をビジネス現場で実装し、具体的な成果につなげることに注力。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <footer className="bg-gray-900 text-white py-10">
           <div className="container mx-auto px-5 flex flex-wrap justify-between">
             <div className="w-full md:w-1/4 mb-5">

@@ -154,7 +154,7 @@ function NewsPage() {
             </div>
             <div className="space-y-8">
               {filteredNews.map((item, index) => (
-                <Link href={`/news/${item.id}`} key={item.id} className="block">
+                // <Link href={`/news/${item.id}`} key={item.id} className="block">
                   <div className={`flex items-start space-x-6 p-6 ${index !== filteredNews.length - 1 ? 'border-b border-gray-400' : ''}`}>
                     <div className="w-1/4">
                       <Image src={item.image} alt={item.title} width={200} height={120} className="rounded-md" />
@@ -167,7 +167,7 @@ function NewsPage() {
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
                     </div>
                   </div>
-                </Link>
+                // </Link>
               ))}
             </div>
           </div>

@@ -114,10 +114,10 @@ function MainComponent() {
         <div className="min-h-screen flex flex-col justify-center items-center text-center p-5 relative">
           <div className="absolute inset-0 bg-white opacity-80"></div>
           <main className="text-black mt-32 relative z-10">
-            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 animate-text leading-relaxed">
-              興味の赴くままに生きられる
-              <br className="mb-4" />
-              世の中を創る
+            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 animate-text leading-tight">
+              <span className="mb-30 block">AIによって</span>
+              <span className="mb-30 block">　仕事を変え、</span>
+              <span className="mb-30 block">　世の中を変えていく。</span>
             </h1>
             <p className="text-sm md:text-lg mb-8 animate-text">生成AIを社会に実装し、より人間が人間らしい暮らしができる世の中を創造する</p>
             <button 
