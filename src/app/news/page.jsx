@@ -62,7 +62,7 @@ function NewsPage() {
   };
 
   const newsItems = [
-    { id: '1', title: 'WEBマーケティング自動化ツール リリース', date: '2024.09.15', category: 'プレスリリース', image: '/images/tool.png' },
+    { id: '1', title: ' コンテンツ戦略 / 投稿 自動生成 リリース', date: '2024.09.15', category: 'プレスリリース', image: '/images/tool.png' },
     { id: '2', title: 'セールスAIエージェント「ウリマッチョ」が日本初AI Agentハッカソンで優勝', date: '2024.08.26', category: 'プレスリリース', image: '/images/urimacho.png' },
     { id: '3', title: '株式会社Link AIを設立', date: '2024.02.08', category: 'プレスリリース', image: '/images/LinkAI.png' },
   ];
